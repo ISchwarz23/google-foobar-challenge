@@ -126,16 +126,27 @@ public final class Challenge3 {
 
     public static class Fraction {
 
-        private int numerator;
-        private int denominator;
+        private final int numerator;
+        private final int denominator;
 
         public Fraction(int numerator, int denominator) {
+            this(numerator, denominator, true);
+        }
+
+        public Fraction(int numerator, int denominator, boolean reduce) {
             if (denominator == 0) {
                 throw new ArithmeticException("Division by zero!");
             }
-            this.numerator = numerator;
-            this.denominator = denominator;
-            this.reduce();
+
+            if (reduce) {
+                int gcd = findGreatestCommonDivisor(numerator, denominator);
+                gcd = denominator > 0 ? gcd : gcd * -1;
+                this.numerator = numerator / gcd;
+                this.denominator = denominator / gcd;
+            } else {
+                this.numerator = numerator;
+                this.denominator = denominator;
+            }
         }
 
         public int getNumerator() {
@@ -144,17 +155,6 @@ public final class Challenge3 {
 
         public int getDenominator() {
             return denominator;
-        }
-
-        private void reduce() {
-            int gcd = findGreatestCommonDivisor(this.numerator, this.denominator);
-            if (this.denominator > 0) {
-                this.numerator = this.numerator / gcd;
-                this.denominator = this.denominator / gcd;
-            } else {
-                this.numerator = this.numerator / (gcd * -1);
-                this.denominator = this.numerator / (gcd * -1);
-            }
         }
 
         private Fraction reciprocal() throws ArithmeticException {
@@ -235,6 +235,9 @@ public final class Challenge3 {
         }
 
         public Matrix inverse() {
+            if (this.m != this.n) {
+                throw new ArithmeticException("Matrix must be square to be inverted");
+            }
 
             Matrix matrixA = Matrix.createZeroMatrix(this.m, this.m);
             for (int i = 0; i < this.m; i++) {
