@@ -1,9 +1,14 @@
-package com.google.foobar.level2;
+package com.google.foobar.level2.challenge2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class Challenge2 {
+public class Solution {
 
     public static int solution(int[] l) {
         List<Integer> digits = Arrays.stream(l).boxed().collect(Collectors.toList());

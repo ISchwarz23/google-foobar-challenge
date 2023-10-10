@@ -1,11 +1,11 @@
-package com.google.foobar.level3;
+package com.google.foobar.level3.challenge3;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
-class Challenge3Test {
+class SolutionTest {
 
     @Test
     void test1() {
@@ -20,7 +20,7 @@ class Challenge3Test {
         };
 
         // when
-        final int[] output = Challenge3.solution(input);
+        final int[] output = Solution.solution(input);
 
         // then
         assertArrayEquals(new int[]{0, 3, 2, 9, 14}, output);
@@ -38,7 +38,7 @@ class Challenge3Test {
         };
 
         // when
-        final int[] output = Challenge3.solution(input);
+        final int[] output = Solution.solution(input);
 
         // then
         assertArrayEquals(new int[]{7, 6, 8, 21}, output);

@@ -1,4 +1,4 @@
-package com.google.foobar.level3;
+package com.google.foobar.level3.challenge1;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public final class Challenge1 {
+public final class Solution {
 
     public static int solution(int[][] map) {
         Collection<Map> possibleMaps = getManipulatedMaps(map);

@@ -1,8 +1,8 @@
-package com.google.foobar.level4;
+package com.google.foobar.level4.challenge1;
 
 import java.util.LinkedList;
 
-public final class Challenge1 {
+public final class Solution {
 
     public static int solution(int[] entrances, int[] exits, int[][] path) {
         // Problem: maximum flow in directed graph

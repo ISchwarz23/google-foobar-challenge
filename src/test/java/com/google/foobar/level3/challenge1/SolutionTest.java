@@ -1,11 +1,11 @@
-package com.google.foobar.level3;
+package com.google.foobar.level3.challenge1;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class Challenge1Test {
+class SolutionTest {
 
     @Test
     void test1() {
@@ -18,7 +18,7 @@ class Challenge1Test {
         };
 
         // when
-        final int output = Challenge1.solution(input);
+        final int output = Solution.solution(input);
 
         // then
         assertEquals(7, output);
@@ -37,7 +37,7 @@ class Challenge1Test {
         };
 
         // when
-        final int output = Challenge1.solution(input);
+        final int output = Solution.solution(input);
 
         // then
         assertEquals(11, output);
@@ -56,7 +56,7 @@ class Challenge1Test {
         };
 
         // when
-        final int output = Challenge1.solution(input);
+        final int output = Solution.solution(input);
 
         // then
         assertEquals(11, output);

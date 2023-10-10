@@ -1,8 +1,8 @@
-package com.google.foobar.level2;
+package com.google.foobar.level2.challenge1;
 
 import java.util.Arrays;
 
-public class Challenge1 {
+public class Solution {
 
     public static String[] solution(String[] l) {
         Arrays.sort(l, (v1, v2) -> {
