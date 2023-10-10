@@ -1,6 +1,6 @@
 package com.google.foobar.level4.challenge1;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public final class Solution {
 
@@ -13,53 +13,60 @@ public final class Solution {
     }
 
     private static int getMaximumFlow(final int[][] graph, final int entryRoomIndex, final int exitRoomIndex) {
-        int[][] resultGraph = copy(graph);
+        int[][] workingGraph = copy(graph);
 
-        // filled by BFS and to store path
-        int[] parentRooms = new int[resultGraph.length];
-        int max_flow = 0;
-        while (runBfsSFCT(resultGraph, entryRoomIndex, exitRoomIndex, parentRooms)) {
-            // find minimum residual capacity of the edges along the path filled by BFS,
-            // or we can say find the maximum flow through the path found.
-            int pathFlow = Integer.MAX_VALUE;
-            for (int i = exitRoomIndex; i != entryRoomIndex; i = parentRooms[i]) {
-                int parent = parentRooms[i];
-                pathFlow = Math.min(pathFlow, resultGraph[parent][i]);
+        int maxFlow = 0;
+        Optional<int[]> optionalPathToEnd;
+        do {
+            optionalPathToEnd = findPathToEnd(workingGraph, entryRoomIndex, exitRoomIndex);
+            if (optionalPathToEnd.isPresent()) {
+                int[] parentRooms = optionalPathToEnd.get();
+                // find the maximum flow through the path
+                int pathFlow = Integer.MAX_VALUE;
+                for (int currentRoomIndex = exitRoomIndex; currentRoomIndex != entryRoomIndex; currentRoomIndex = parentRooms[currentRoomIndex]) {
+                    int parentRoomIndex = parentRooms[currentRoomIndex];
+                    pathFlow = Math.min(pathFlow, workingGraph[parentRoomIndex][currentRoomIndex]);
+                }
+                // add path flow to overall flow
+                maxFlow += pathFlow;
+                // update capacities of the edges along the path
+                for (int currentRoomIndex = exitRoomIndex; currentRoomIndex != entryRoomIndex; currentRoomIndex = parentRooms[currentRoomIndex]) {
+                    int parentRoomIndex = parentRooms[currentRoomIndex];
+                    workingGraph[parentRoomIndex][currentRoomIndex] -= pathFlow;
+                }
             }
-            // update residual capacities of the edges and reverse edges along the path
-            for (int i = exitRoomIndex; i != entryRoomIndex; i = parentRooms[i]) {
-                int parent = parentRooms[i];
-                resultGraph[parent][i] -= pathFlow;
-                resultGraph[i][parent] += pathFlow;
-            }
-            // add path flow to overall flow
-            max_flow += pathFlow;
-        }
-        return max_flow;
+        } while (optionalPathToEnd.isPresent());
+        return maxFlow;
     }
 
-    private static boolean runBfsSFCT(final int[][] graph, final int entryNodeIndex, final int exitNodeIndex, final int[] parentRooms) {
-        // create a queue, enqueue source vertex...
+    private static Optional<int[]> findPathToEnd(final int[][] graph, final int entryNodeIndex, final int exitNodeIndex) {
+        int[] parentRooms = new int[graph.length];
+        // create a queue, enqueue source room...
         LinkedList<Integer> nodeQueue = new LinkedList<>();
         nodeQueue.add(entryNodeIndex);
-        // ... and mark source vertex as visited
-        boolean[] visited = new boolean[graph.length];
-        visited[entryNodeIndex] = true;
+        // ... and mark source room as visited...
+        boolean[] visitedRooms = new boolean[graph.length];
+        visitedRooms[entryNodeIndex] = true;
+        // ... and set parent of entry node to -1
         parentRooms[entryNodeIndex] = -1;
 
         // standard BFS loop
         while (!nodeQueue.isEmpty()) {
             int currentRoomIndex = nodeQueue.poll();
             for (int roomIndex = 0; roomIndex < graph.length; roomIndex++) {
-                if (!visited[roomIndex] && graph[currentRoomIndex][roomIndex] > 0) {
+                if (!visitedRooms[roomIndex] && graph[currentRoomIndex][roomIndex] > 0) {
                     nodeQueue.add(roomIndex);
                     parentRooms[roomIndex] = currentRoomIndex;
-                    visited[roomIndex] = true;
+                    visitedRooms[roomIndex] = true;
                 }
             }
         }
-        // if sink reached in BFS starting from source, return true; else false
-        return visited[exitNodeIndex];
+        // if exit reached in BFS starting from source, return true; else false
+        if (visitedRooms[exitNodeIndex]) {
+            return Optional.of(parentRooms);
+        } else {
+            return Optional.empty();
+        }
     }
 
     private static int[][] createGraphWithSingleEntryAndExitRoom(int[] entrances, int[] exits, int[][] path) {
