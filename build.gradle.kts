@@ -5,6 +5,11 @@ plugins {
 group = "com.google.foobar"
 version = "1.0-SNAPSHOT"
 
+tasks.compileJava {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+}
+
 repositories {
     mavenCentral()
 }
