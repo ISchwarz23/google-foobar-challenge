@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public final class Solution {
+public class Solution {
 
     public static int solution(int[][] map) {
         Collection<Map> possibleMaps = getManipulatedMaps(map);

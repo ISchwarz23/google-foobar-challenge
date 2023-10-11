@@ -4,9 +4,9 @@ package com.google.foobar.level4.challenge2;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Solution {
+public class Solution {
 
-    public static int[][] solution(int numberOfBunnies, int numberOfRequiredBunnies) {
+    public static int[][] solution(final int numberOfBunnies, final int numberOfRequiredBunnies) {
         // EXAMPLE
         // => numberOfBunnies = 5; numberOfRequiredBunnies = 3
         // => numberOfDuplicateKeys = 3
@@ -18,7 +18,7 @@ public final class Solution {
         // [       2,    4, 5,    7, 8, 9 ]
 
         // calculate number of duplicate keys
-        int numberOfDuplicateKeys = numberOfBunnies - numberOfRequiredBunnies + 1;
+        final int numberOfDuplicateKeys = numberOfBunnies - numberOfRequiredBunnies + 1;
 
         // create key combinations holder
         List<List<Integer>> keysPerBunny = new ArrayList<>();
@@ -28,8 +28,8 @@ public final class Solution {
 
         // calculate pattern using binary numbers containing the calculated number of duplicate keys
         // therefore iterate from (2 ^ numberOfBunnies - 2 ^ (numberOfBunnies - numberOfDuplicateKeys) down to (2 ^ numberOfDuplicateKeys - 1)
-        int lowerBound = (int) Math.pow(2, numberOfDuplicateKeys) - 1;
-        int upperBound = (int) (Math.pow(2, numberOfBunnies) - Math.pow(2, numberOfBunnies - numberOfDuplicateKeys));
+        final int lowerBound = (int) Math.pow(2, numberOfDuplicateKeys) - 1;
+        final int upperBound = (int) (Math.pow(2, numberOfBunnies) - Math.pow(2, numberOfBunnies - numberOfDuplicateKeys));
 
         int keyId = 0;
         for (int i = upperBound; i >= lowerBound; i--) {

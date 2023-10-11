@@ -1,6 +1,6 @@
 package com.google.foobar.level3.challenge2;
 
-public final class Solution {
+public class Solution {
 
     public static int solution(int start, int length) {
         int result = 0;

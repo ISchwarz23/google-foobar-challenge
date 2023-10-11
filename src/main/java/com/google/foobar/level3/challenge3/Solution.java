@@ -2,7 +2,7 @@ package com.google.foobar.level3.challenge3;
 
 import java.util.Arrays;
 
-public final class Solution {
+public class Solution {
 
     public static int[] solution(int[][] m) {
         // remark: solved using "Markov Chain"

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public final class Solution {
+public class Solution {
 
     public static int solution(int[] entrances, int[] exits, int[][] path) {
         int[][] flowGraph = createGraphWithSingleEntryAndExitRoom(entrances, exits, path);
