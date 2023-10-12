@@ -1,3 +1,5 @@
+[![Test Cases](https://github.com/ISchwarz23/google-foobar-challenge/actions/workflows/main.yml/badge.svg)](https://github.com/ISchwarz23/google-foobar-challenge/actions/workflows/main.yml)
+
 # Google FooBar Challenge
 This repository contains my solutions I provided to Google's FooBar challenge. (2023)
 
