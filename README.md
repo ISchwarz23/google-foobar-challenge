@@ -18,3 +18,5 @@ Unfortunately I was forced to use the JDK 8 by the FooBar platform. So I was not
 - Level 4
   - [Escape Pods](src/main/java/com/google/foobar/level4/challenge1)
   - [Free the Bunny Workers](src/main/java/com/google/foobar/level4/challenge2)
+- Level 5
+  - [Disorderly Escape](src/main/java/com/google/foobar/level5/challenge1)
